@@ -128,6 +128,10 @@ class MyWindows:  # 新建一个窗口类
     def WindowsClickSnackFight(self):
         pos = self.getPhotoPos("./img/necessary/tiaozhan_ok.png")
         if pos is None:
+            time.sleep(2)
+            xuanshangpos = self.getPhotoPos("./img/necessary/xuanshang.png")
+            if xuanshangpos is not None:
+                self.WindowClickXuanShang(xuanshangpos)
             for i in range(2):
                 time.sleep(3)
                 if pos is not None:
@@ -139,6 +143,11 @@ class MyWindows:  # 新建一个窗口类
             x, y = self.posClickRandom(pos.left, pos.top, pos.width, pos.height)
             MouseClick(x, y)
             return 1
+    def WindowClickXuanShang(self):
+        jujuepos = self.getPhotoPos("./img/necessary/jujuexuanshang.png")
+        x, y = self.posClickRandom(jujuepos.left, jujuepos.top, jujuepos.width, jujuepos.height)
+        MouseClick(x, y)
+
 
     def WindowsClickOther(self):
         self.random_x_other = random.uniform(0.7, 0.74)
@@ -171,14 +180,17 @@ def turnOneSelect(class1):
 # 测试时间 图片对比所需时间
 def snake_two(class1, class2, num, times):
     WaitTime_wait(1)
+    print("司机准备开车！")
     if num == "1":
          x = class1.WindowsClickSnackFight()
     elif num == "2":
         x = class2.WindowsClickSnackFight()
     if x == 0:
         return 0
+    print("司机开车成功！")
     WaitTime_wait(times)
-    turn_two(class1, class2)
+    print("收菜！")
+    turn_two(class1, class2) #分别在两个窗口点两下
     WaitTime_short(3)
     turn_two(class1, class2)
     WaitTime_short(4)

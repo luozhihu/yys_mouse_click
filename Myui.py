@@ -152,6 +152,7 @@ class DoubleYuHun(Ui_start, QObject):
             # 1080显示的值840 500
             a = win32api.GetSystemMetrics(win32con.SM_CXSCREEN)
             b = win32api.GetSystemMetrics(win32con.SM_CYSCREEN)
+            print('x=', a, 'y=', b)
             if a == 1920 and b == 1080:
                 windowsX = 840
                 windowsy = 508
@@ -204,8 +205,9 @@ class DoubleYuHun(Ui_start, QObject):
         while (1):
             x = option.snake_two(window1, window2, num, time) # 得分离开来将一次事件
             self.turnTimes += 1
+            print("轮数：", self.turnTimes)
             self.label10.setText(str(self.turnTimes) + "轮")
-            if self.turnTimes >= 100:
+            if self.turnTimes >= 999:
                 self.signalCancel.signalCancel.emit("别刷辣别刷辣！我要累死了！")
             if pyautogui.locateOnScreen("./img/necessary/toomany.png",confidence = 0.6 ) is not None:
                 self.signalCancel.signalCancel.emit("御魂太多啦，停下清理御魂吧！")
